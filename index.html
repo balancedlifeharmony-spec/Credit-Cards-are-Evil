@@ -1,0 +1,819 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>The Credit Card Truth: How Banks Are Destroying North America's Financial Future</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.9.1/chart.min.js"></script>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: #333;
+            line-height: 1.6;
+        }
+
+        .hero {
+            background: linear-gradient(135deg, #ff6b6b 0%, #ee5a24 100%);
+            color: white;
+            text-align: center;
+            padding: 80px 20px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(0,0,0,0.3);
+            z-index: 1;
+        }
+
+        .hero-content {
+            position: relative;
+            z-index: 2;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .hero h1 {
+            font-size: 3.5rem;
+            font-weight: 900;
+            margin-bottom: 20px;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.5);
+            animation: pulse 2s infinite;
+        }
+
+        @keyframes pulse {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+            100% { transform: scale(1); }
+        }
+
+        .hero-subtitle {
+            font-size: 1.5rem;
+            margin-bottom: 30px;
+            opacity: 0.95;
+        }
+
+        .shocking-stat {
+            background: rgba(255,255,255,0.2);
+            padding: 20px;
+            border-radius: 15px;
+            margin: 20px 0;
+            backdrop-filter: blur(10px);
+        }
+
+        .shocking-stat h2 {
+            font-size: 2.5rem;
+            color: #ffff00;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.7);
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        .section {
+            background: white;
+            margin: 40px 0;
+            padding: 60px 40px;
+            border-radius: 20px;
+            box-shadow: 0 15px 35px rgba(0,0,0,0.1);
+            position: relative;
+        }
+
+        .section-title {
+            font-size: 2.5rem;
+            margin-bottom: 30px;
+            color: #2c3e50;
+            text-align: center;
+            position: relative;
+        }
+
+        .section-title::after {
+            content: '';
+            width: 100px;
+            height: 4px;
+            background: linear-gradient(135deg, #ff6b6b, #ee5a24);
+            position: absolute;
+            bottom: -10px;
+            left: 50%;
+            transform: translateX(-50%);
+            border-radius: 2px;
+        }
+
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 30px;
+            margin: 40px 0;
+        }
+
+        .stat-card {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 30px;
+            border-radius: 15px;
+            text-align: center;
+            transform: translateY(0);
+            transition: transform 0.3s ease;
+        }
+
+        .stat-card:hover {
+            transform: translateY(-10px);
+        }
+
+        .stat-number {
+            font-size: 3rem;
+            font-weight: 900;
+            display: block;
+            margin-bottom: 10px;
+        }
+
+        .chart-container {
+            position: relative;
+            height: 400px;
+            margin: 40px 0;
+            background: #f8f9fa;
+            border-radius: 15px;
+            padding: 20px;
+        }
+
+        .infographic {
+            background: linear-gradient(135deg, #2c3e50 0%, #3498db 100%);
+            color: white;
+            padding: 60px 40px;
+            border-radius: 20px;
+            margin: 40px 0;
+        }
+
+        .infographic-item {
+            display: flex;
+            align-items: center;
+            margin: 30px 0;
+            padding: 20px;
+            background: rgba(255,255,255,0.1);
+            border-radius: 15px;
+            backdrop-filter: blur(10px);
+        }
+
+        .infographic-icon {
+            font-size: 3rem;
+            margin-right: 20px;
+            width: 80px;
+            text-align: center;
+        }
+
+        .infographic-text h3 {
+            font-size: 1.5rem;
+            margin-bottom: 10px;
+            color: #f39c12;
+        }
+
+        .social-share {
+            background: #1a1a1a;
+            color: white;
+            padding: 40px;
+            border-radius: 20px;
+            text-align: center;
+            margin: 40px 0;
+        }
+
+        .share-buttons {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            margin: 30px 0;
+            flex-wrap: wrap;
+        }
+
+        .share-btn {
+            background: linear-gradient(135deg, #3b82f6, #1d4ed8);
+            color: white;
+            padding: 15px 30px;
+            border: none;
+            border-radius: 50px;
+            font-size: 1rem;
+            cursor: pointer;
+            transition: transform 0.3s ease;
+            text-decoration: none;
+            display: inline-block;
+        }
+
+        .share-btn:hover {
+            transform: scale(1.05);
+        }
+
+        .share-btn.twitter { background: linear-gradient(135deg, #1da1f2, #0d8bd9); }
+        .share-btn.facebook { background: linear-gradient(135deg, #4267B2, #365899); }
+        .share-btn.linkedin { background: linear-gradient(135deg, #0077b5, #005885); }
+
+        .brain-section {
+            background: linear-gradient(135deg, #ff6b6b 0%, #ee5a24 100%);
+            color: white;
+            padding: 60px 40px;
+            border-radius: 20px;
+            margin: 40px 0;
+        }
+
+        .brain-facts {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+            margin: 40px 0;
+        }
+
+        .brain-fact {
+            background: rgba(255,255,255,0.1);
+            padding: 30px;
+            border-radius: 15px;
+            backdrop-filter: blur(10px);
+        }
+
+        .article-content {
+            font-size: 1.1rem;
+            line-height: 1.8;
+            margin: 30px 0;
+        }
+
+        .article-content h3 {
+            font-size: 1.8rem;
+            margin: 30px 0 15px 0;
+            color: #2c3e50;
+        }
+
+        .highlight-box {
+            background: linear-gradient(135deg, #ffeaa7, #fdcb6e);
+            padding: 30px;
+            border-radius: 15px;
+            margin: 30px 0;
+            border-left: 5px solid #e17055;
+        }
+
+        .highlight-box strong {
+            color: #d63031;
+        }
+
+        @media (max-width: 768px) {
+            .hero h1 { font-size: 2.5rem; }
+            .hero-subtitle { font-size: 1.2rem; }
+            .section { padding: 40px 20px; }
+            .infographic-item { flex-direction: column; text-align: center; }
+            .infographic-icon { margin-right: 0; margin-bottom: 15px; }
+        }
+
+        .footer {
+            background: #2c3e50;
+            color: white;
+            text-align: center;
+            padding: 40px 20px;
+        }
+
+        .cta-button {
+            background: linear-gradient(135deg, #00b894, #00a085);
+            color: white;
+            padding: 20px 40px;
+            border: none;
+            border-radius: 50px;
+            font-size: 1.2rem;
+            font-weight: bold;
+            cursor: pointer;
+            transition: transform 0.3s ease;
+            margin: 20px 10px;
+            text-decoration: none;
+            display: inline-block;
+        }
+
+        .cta-button:hover {
+            transform: scale(1.05);
+        }
+    </style>
+</head>
+<body>
+    <div class="hero">
+        <div class="hero-content">
+            <h1>💳 CREDIT CARDS ARE EVIL 💳</h1>
+            <p class="hero-subtitle">How Banks Are Legally Robbing North Americans Through Psychological Manipulation</p>
+            
+            <div class="shocking-stat">
+                <h2>🇺🇸 $1.21T + 🇨🇦 $124B = $1.33T</h2>
+                <p>North Americans owe $1,330,000,000,000 in credit card debt - nearly identical per capita crisis</p>
+            </div>
+            
+            <div class="shocking-stat">
+                <h2>$3,633 vs $3,179 per person</h2>
+                <p>Americans and Canadians carry almost identical credit card debt burdens - proving the manipulation works the same everywhere</p>
+            </div>
+        </div>
+    </div>
+
+    <div class="container">
+        <div class="section">
+            <h2 class="section-title">🚨 THE GLOBAL DEBT CRISIS REALITY</h2>
+            
+            <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 40px; margin-bottom: 40px;">
+                <div>
+                    <h3 style="text-align: center; color: #e74c3c; margin-bottom: 20px;">🇺🇸 UNITED STATES</h3>
+                    <div class="stats-grid" style="grid-template-columns: repeat(2, 1fr);">
+                        <div class="stat-card">
+                            <span class="stat-number">$1.21T</span>
+                            <p>Total credit card debt - record high</p>
+                        </div>
+                        
+                        <div class="stat-card">
+                            <span class="stat-number">$3,633</span>
+                            <p>Credit card debt per person</p>
+                        </div>
+                        
+                        <div class="stat-card">
+                            <span class="stat-number">30%</span>
+                            <p>Maximum interest rates by major banks</p>
+                        </div>
+                        
+                        <div class="stat-card">
+                            <span class="stat-number">7.18%</span>
+                            <p>Of debt is 90+ days past due</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <div>
+                    <h3 style="text-align: center; color: #e74c3c; margin-bottom: 20px;">🇨🇦 CANADA</h3>
+                    <div class="stats-grid" style="grid-template-columns: repeat(2, 1fr);">
+                        <div class="stat-card">
+                            <span class="stat-number">$124B</span>
+                            <p>Total credit card debt - record high</p>
+                        </div>
+                        
+                        <div class="stat-card">
+                            <span class="stat-number">$3,179</span>
+                            <p>Credit card debt per person</p>
+                        </div>
+                        
+                        <div class="stat-card">
+                            <span class="stat-number">47.9%</span>
+                            <p>Legal interest rate until Jan 2025</p>
+                        </div>
+                        
+                        <div class="stat-card">
+                            <span class="stat-number">0.93%</span>
+                            <p>Serious delinquency rate (90+ days)</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="highlight-box">
+                <h3 style="margin-bottom: 15px;">💥 THE SHOCKING TRUTH - NEARLY IDENTICAL PER CAPITA DEBT:</h3>
+                <ul style="text-align: left;">
+                    <li><strong>US: $3,633 per person in credit card debt</strong></li>
+                    <li><strong>Canada: $3,179 per person in credit card debt</strong></li>
+                    <li><strong>The crisis is identical across North America</strong> - same predatory techniques, same devastating results</li>
+                    <li><strong>Canada's $2.5T total consumer debt</strong> includes mortgages, auto loans, lines of credit</li>
+                    <li><strong>74% of Canadians used credit cards for essentials</strong> vs 48% of Americans</li>
+                    <li><strong>Credit card balances grew 9.2% year-over-year</strong> in Canada - 31 consecutive months of growth</li>
+                </ul>
+            </div>
+
+            <div class="chart-container">
+                <canvas id="debtChart"></canvas>
+            </div>
+        </div>
+
+        <div class="brain-section">
+            <h2 class="section-title">🧠 HOW CREDIT CARDS HIJACK YOUR BRAIN</h2>
+            <p style="font-size: 1.3rem; text-align: center; margin-bottom: 40px;">
+                MIT research reveals credit cards literally activate the same brain regions as COCAINE and AMPHETAMINES
+            </p>
+            
+            <div class="brain-facts">
+                <div class="brain-fact">
+                    <h3>🎯 "Step on the Gas" Effect</h3>
+                    <p>Credit cards don't just remove spending barriers - they create CRAVINGS to spend more by activating your brain's reward system</p>
+                </div>
+                
+                <div class="brain-fact">
+                    <h3>💊 Addiction-Like Mechanics</h3>
+                    <p>Credit cards sensitize the same dopamine pathways exploited by addictive drugs, creating psychological dependence</p>
+                </div>
+                
+                <div class="brain-fact">
+                    <h3>😵 Pain Disconnection</h3>
+                    <p>Spending $1 on credit feels like spending only 50¢ - they literally disconnect pleasure from pain</p>
+                </div>
+                
+                <div class="brain-fact">
+                    <h3>📈 12-18% Overspending</h3>
+                    <p>Studies prove people spend up to 18% more with credit cards vs cash - that's not an accident</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="infographic">
+            <h2 class="section-title">⚠️ THE PREDATORY PLAYBOOK</h2>
+            
+            <div class="infographic-item">
+                <div class="infographic-icon">🎯</div>
+                <div class="infographic-text">
+                    <h3>Target Vulnerable People</h3>
+                    <p>Banks specifically target low-income consumers, students, and those with bad credit using "fee-harvester" cards that provide almost no actual credit</p>
+                </div>
+            </div>
+            
+            <div class="infographic-item">
+                <div class="infographic-icon">🧪</div>
+                <div class="infographic-text">
+                    <h3>Psychological Manipulation</h3>
+                    <p>Decades of research into human psychology used to design systems that exploit mental weaknesses and create spending addiction</p>
+                </div>
+            </div>
+            
+            <div class="infographic-item">
+                <div class="infographic-icon">💰</div>
+                <div class="infographic-text">
+                    <h3>Profit from Misery</h3>
+                    <p>Credit card company profits skyrocketed from $7.3 billion to $20 billion between 1995-1999 through aggressive marketing and deceptive practices</p>
+                </div>
+            </div>
+            
+            <div class="infographic-item">
+                <div class="infographic-icon">🔒</div>
+                <div class="infographic-text">
+                    <h3>Debt Trap Design</h3>
+                    <p>Minimum payments designed to keep you in debt for decades - a $250 credit limit can result in only $72 of actual buying power after fees</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="section">
+            <h2 class="section-title">📊 THE EVIDENCE</h2>
+            
+            <div class="article-content">
+                <h3>Record-Breaking Credit Card Debt Crisis - A North American Epidemic</h3>
+                <p><strong>United States:</strong> Americans now carry <strong>$1.21 trillion in credit card debt</strong> ($3,633 per person), with balances rising $27 billion in just the second quarter of 2025. Nearly half of all cardholders now rely on credit cards to cover basic living expenses.</p>
+                
+                <p><strong>Canada:</strong> Canadians carry <strong>$124 billion in credit card debt</strong> ($3,179 per person), remarkably similar to their southern neighbors. Credit card balances grew 9.2% year-over-year, continuing 31 months of consecutive growth. The average Canadian credit card balance hit $4,562, the highest since 2007.</p>
+
+                <div class="highlight-box">
+                    <strong>THE SHOCKING REVELATION:</strong> Despite different currencies, economies, and populations, Canadians and Americans carry almost identical per-capita credit card debt. This proves the psychological manipulation techniques work universally - banks are using the same playbook on both sides of the border.
+                </div>
+
+                <h3>Predatory Interest Rates - Legal Loan Sharking</h3>
+                <p><strong>United States:</strong> Major banks charge interest rates averaging over 20%, with some reaching 30% - rates that would make loan sharks blush. Research shows large banks charge significantly higher rates than smaller institutions.</p>
+                
+                <p><strong>Canada's Historic Admission:</strong> Until January 1, 2025, predatory lenders in Canada could legally charge up to 47.9% interest on loans - nearly 50%! The federal government finally stepped in, reducing the criminal interest rate to 35% and acknowledging that "predatory lenders can take advantage of the most vulnerable people in our communities".</p>
+
+                <h3>Brain Manipulation Science - Identical Effects Across Borders</h3>
+                <p>MIT neuroscience research reveals that credit cards activate the brain's reward center - the same region exploited by cocaine and amphetamines. This psychological manipulation works identically on Canadian and American brains, explaining why the per-capita debt levels are so remarkably similar.</p>
+
+                <div class="highlight-box">
+                    <strong>THE SMOKING GUN:</strong> In controlled experiments, people bid more than TWICE as much for the same items when paying with credit cards vs cash. The psychological cost of spending $1 on credit feels like only 50 cents - whether you're spending US dollars or Canadian loonies.
+                </div>
+
+                <h3>Targeting the Vulnerable - A Cross-Border Problem</h3>
+                <p><strong>United States:</strong> Credit card companies systematically target vulnerable populations including low-income consumers, students, and those with bad credit. "Fee-harvester" cards marketed to subprime borrowers often provide credit limits of $250 but only $72 in actual buying power after fees.</p>
+                
+                <p><strong>Canada:</strong> The rates of payday and high-interest lender usage is higher among vulnerable populations, including low-income households, single parents, and Indigenous Canadians. Until 2025, these lenders could legally charge 47.9% interest - higher than many illegal loan sharks!</p>
+
+                <h3>The Human Cost - Families Destroyed on Both Sides of the Border</h3>
+                <p><strong>United States:</strong> 7.18% of credit card balances are now 90+ days delinquent, representing millions of families facing financial ruin. The rise coincides with 48% of cardholders using credit just to cover basic necessities.</p>
+                
+                <p><strong>Canada:</strong> While serious delinquency rates (0.93%) appear lower, Bank of Canada research shows carrying a balance significantly increases the likelihood of missing future debt payments. Non-mortgagors carrying balances for 7-12 months are seven times more likely to experience financial stress. Alarmingly, 74% of Canadians used credit cards for essential purchases - higher than the US rate.</p>
+
+                <div class="highlight-box">
+                    <strong>CANADA'S TOTAL DEBT PICTURE:</strong> Canada's $2.5 trillion in total consumer debt includes mortgages, auto loans, and lines of credit - not just credit cards. When comparing apples to apples (credit cards only), the crisis is nearly identical per capita. The real story is that the same predatory techniques are destroying families on both sides of the world's longest undefended border.
+                </div>
+            </div>
+
+            <div class="chart-container">
+                <canvas id="interestChart"></canvas>
+            </div>
+        </div>
+
+        <div class="social-share">
+            <h2>🔥 SHARE THE TRUTH 🔥</h2>
+            <p>Don't let banks continue destroying families. Share these facts and wake people up!</p>
+            
+            <div class="share-buttons">
+                <button class="share-btn twitter" onclick="shareToTwitter()">Share on Twitter</button>
+                <button class="share-btn facebook" onclick="shareToFacebook()">Share on Facebook</button>
+                <button class="share-btn linkedin" onclick="shareToLinkedIn()">Share on LinkedIn</button>
+                <button class="share-btn" onclick="copyLink()">Copy Link</button>
+            </div>
+            
+            <div style="margin-top: 30px;">
+                <h3>💣 Ready-to-Share Facts:</h3>
+                <div style="text-align: left; max-width: 600px; margin: 20px auto;">
+                    <p>🚨 "North Americans owe $3.71 TRILLION in debt - US: $1.21T credit cards, Canada: $2.5T total consumer debt"</p>
+                    <p>🧠 "MIT research: Credit cards activate the same brain regions as COCAINE to create spending addiction"</p>
+                    <p>🇨🇦 "Until 2025, Canadian lenders legally charged 47.9% interest - predatory lending was LEGAL"</p>
+                    <p>💸 "74% of Canadians + 48% of Americans now use credit cards for BASIC NECESSITIES"</p>
+                    <p>🎯 "Banks charge up to 30% interest while targeting vulnerable families - legal loan sharking across North America"</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="section">
+            <h2 class="section-title">🛡️ PROTECT YOURSELF</h2>
+            
+            <div class="article-content">
+                <h3>Break Free from the Manipulation</h3>
+                <p>Understanding how credit cards exploit your brain is the first step to freedom. Here's how to protect yourself and your family:</p>
+                
+                <ul style="font-size: 1.1rem; margin: 20px 0;">
+                    <li><strong>Use cash whenever possible</strong> - Physical money activates your brain's "pain of payment" and naturally limits spending</li>
+                    <li><strong>If you must use credit, pay in full immediately</strong> - Never carry a balance, even for a single month</li>
+                    <li><strong>Avoid "rewards" cards</strong> - They're designed to make you spend more than you earn in rewards</li>
+                    <li><strong>Educate others</strong> - Share this information with friends and family to protect them</li>
+                    <li><strong>Support legislation</strong> - Contact representatives about interest rate caps and predatory lending laws</li>
+                </ul>
+
+                <div class="highlight-box">
+                    <strong>REMEMBER:</strong> Credit card companies spend billions on psychological research to manipulate your behavior. Every feature - from the card design to the rewards programs - is engineered to extract maximum profit from your financial pain.
+                </div>
+            </div>
+        </div>
+
+        <div class="section">
+            <h2 class="section-title">📚 SOURCES & RESEARCH</h2>
+            
+            <div class="article-content">
+                <h3>🧠 Neuroscience & Psychology Studies</h3>
+                <ul style="font-size: 1rem; line-height: 1.6;">
+                    <li><strong>MIT Sloan Study on Credit Card Brain Activation:</strong><br>
+                        <a href="https://mitsloan.mit.edu/experts/how-credit-cards-activate-reward-center-our-brains-and-drive-spending" target="_blank" style="color: #3498db;">How credit cards activate the reward center of our brains and drive spending | MIT Sloan</a></li>
+                    
+                    <li><strong>Scientific Reports - Neural mechanisms of credit card spending:</strong><br>
+                        <a href="https://www.nature.com/articles/s41598-021-83488-3" target="_blank" style="color: #3498db;">Neural mechanisms of credit card spending | Scientific Reports</a></li>
+                    
+                    <li><strong>MIT Spectrum - Psychology of Spending:</strong><br>
+                        <a href="https://betterworld.mit.edu/spectrum/issues/winter-1999/the-psychology-of-spending/" target="_blank" style="color: #3498db;">The Psychology of Spending | MIT for a Better World</a></li>
+                    
+                    <li><strong>CNBC Report on MIT Brain Study:</strong><br>
+                        <a href="https://www.cnbc.com/2021/03/13/credit-cards-activate-brain-reward-network-create-cravings.html" target="_blank" style="color: #3498db;">MIT study: Paying with credit cards activates your brain to create 'purchase cravings'</a></li>
+                </ul>
+
+                <h3>💰 Federal Reserve & Government Data</h3>
+                <ul style="font-size: 1rem; line-height: 1.6;">
+                    <li><strong>NY Fed Household Debt Report (Q2 2025):</strong><br>
+                        <a href="https://www.newyorkfed.org/microeconomics/hhdc" target="_blank" style="color: #3498db;">Household Debt and Credit Report - Federal Reserve Bank of New York</a></li>
+                    
+                    <li><strong>CNBC Analysis of Fed Data:</strong><br>
+                        <a href="https://www.cnbc.com/2025/08/05/ny-fed-credit-card-debt-second-quarter-2025.html" target="_blank" style="color: #3498db;">Credit card debt reaches $1.21 trillion — in line with last year's all-time high</a></li>
+                    
+                    <li><strong>CBS News on Interest Rates:</strong><br>
+                        <a href="https://www.cbsnews.com/news/why-credit-card-rates-are-so-high-now-what-to-do-about-it/" target="_blank" style="color: #3498db;">Why credit card interest rates are so high now (and what to do about it)</a></li>
+                    
+                    <li><strong>CNBC on High Interest Rates:</strong><br>
+                        <a href="https://www.cnbc.com/select/high-credit-card-interest-rates/" target="_blank" style="color: #3498db;">Why Are Credit Card Interest Rates So High?</a></li>
+                </ul>
+
+                <h3>🍁 Canadian Government & Bank of Canada Data</h3>
+                <ul style="font-size: 1rem; line-height: 1.6;">
+                    <li><strong>Statistics Canada Monthly Credit Aggregates:</strong><br>
+                        <a href="https://www150.statcan.gc.ca/n1/daily-quotidien/250320/dq250320c-eng.htm" target="_blank" style="color: #3498db;">Monthly credit aggregates, January 2025 | Statistics Canada</a></li>
+                    
+                    <li><strong>Bank of Canada Research on Credit Card Stress:</strong><br>
+                        <a href="https://www.bankofcanada.ca/2024/07/staff-analytical-note-2024-18/" target="_blank" style="color: #3498db;">The reliance of Canadians on credit card debt as a predictor of financial stress</a></li>
+                    
+                    <li><strong>Government of Canada Predatory Lending Consultation:</strong><br>
+                        <a href="https://www.canada.ca/en/department-finance/programs/consultations/2023/consultation-on-cracking-down-on-predatory-lending-faster-by-further-lowering-the-criminal-rate-of-interest-and-increasing-access-to-low-cost-credit.html" target="_blank" style="color: #3498db;">Consultation on Cracking Down on Predatory Lending by Further Lowering the Criminal Rate of Interest</a></li>
+                    
+                    <li><strong>CBC Report on New Interest Rate Limits:</strong><br>
+                        <a href="https://www.cbc.ca/news/canada/calgary/predatory-lending-interest-limit-1.7426411" target="_blank" style="color: #3498db;">New limit on high-interest loans targets 'predatory lending practices'</a></li>
+                    
+                    <li><strong>Canada Gazette Criminal Interest Rate Regulations:</strong><br>
+                        <a href="https://gazette.gc.ca/rp-pr/p2/2024/2024-06-19/html/sor-dors114-eng.html" target="_blank" style="color: #3498db;">Criminal Interest Rate Regulations | Canada Gazette</a></li>
+                </ul>
+
+                <h3>🎯 Predatory Lending Research</h3>
+                <ul style="font-size: 1rem; line-height: 1.6;">
+                    <li><strong>Consumer Financial Protection Bureau Report:</strong><br>
+                        <a href="https://www.commondreams.org/news/cfpb-credit-card-report" target="_blank" style="color: #3498db;">New CFPB Research Spotlights 'Predatory' Credit Card Practices of Big Banks</a></li>
+                    
+                    <li><strong>National Consumer Law Center - Fee Harvesters Report:</strong><br>
+                        <a href="https://www.vujoviclaw.com/high-fee-low-credit-predatory-credit-cards-prey-upon-the-poor/" target="_blank" style="color: #3498db;">High Fee -- Low Credit Predatory Credit Cards Prey Upon the Poor</a></li>
+                    
+                    <li><strong>Center for Responsible Lending:</strong><br>
+                        <a href="https://www.responsiblelending.org/research-publication/predatory-credit-card-lending-unsafe-unsound-consumers-and-lenders" target="_blank" style="color: #3498db;">Predatory Credit Card Lending: Unsafe, Unsound for Consumers and Lenders</a></li>
+                    
+                    <li><strong>Maine Center for Economic Policy:</strong><br>
+                        <a href="https://www.mecep.org/blog/predatory-lending-an-explainer/" target="_blank" style="color: #3498db;">Predatory Lending — An Explainer</a></li>
+                </ul>
+
+                <h3>📊 Consumer Debt Statistics</h3>
+                <ul style="font-size: 1rem; line-height: 1.6;">
+                    <li><strong>LendingTree Credit Card Debt Statistics (US):</strong><br>
+                        <a href="https://www.lendingtree.com/credit-cards/study/credit-card-debt-statistics/" target="_blank" style="color: #3498db;">2025 Credit Card Debt Statistics | LendingTree</a></li>
+                    
+                    <li><strong>Bankrate 2025 Credit Card Debt Report (US):</strong><br>
+                        <a href="https://www.bankrate.com/credit-cards/news/credit-card-debt-report/" target="_blank" style="color: #3498db;">Bankrate's 2025 Credit Card Debt Report</a></li>
+                    
+                    <li><strong>CBS News on Record Debt (US):</strong><br>
+                        <a href="https://www.cbsnews.com/news/credit-card-debt-higher-than-ever-how-to-reduce-yours-now/" target="_blank" style="color: #3498db;">Credit card debt is higher than ever: 5 ways to reduce what you owe now</a></li>
+                    
+                    <li><strong>ABC News Federal Reserve Report (US):</strong><br>
+                        <a href="https://abcnews.go.com/Business/americans-credit-card-debt-reaches-new-record-high/story?id=118788620" target="_blank" style="color: #3498db;">Americans' credit card debt reaches new record high: New York Federal Reserve</a></li>
+                    
+                    <li><strong>NerdWallet Canadian Consumer Credit Card Report 2025:</strong><br>
+                        <a href="https://www.nerdwallet.com/ca/p/article/credit-cards/2025-canadian-consumer-credit-card-report" target="_blank" style="color: #3498db;">2025 Canadian Consumer Credit Card Report | NerdWallet Canada</a></li>
+                    
+                    <li><strong>TransUnion Canada Q4 2024 Credit Industry Report:</strong><br>
+                        <a href="https://newsroom.transunion.ca/canadian-consumer-debt-continues-to-grow-despite-macroeconomic-relief/" target="_blank" style="color: #3498db;">Canadian Consumer Debt Continues to Grow Despite Macroeconomic Relief</a></li>
+                    
+                    <li><strong>Equifax Canada Q4 2024 Market Pulse Report:</strong><br>
+                        <a href="https://www.equifax.ca/business/blog/all-news/-/story/stable-versus-struggling-canada-s-financial-divide-widens/" target="_blank" style="color: #3498db;">Stable versus Struggling: Canada's Financial Divide Widens | Equifax</a></li>
+                    
+                    <li><strong>MoneySense Analysis on Canadian Credit Card Debt:</strong><br>
+                        <a href="https://www.moneysense.ca/save/debt/how-much-credit-card-debt-does-the-average-canadian-have/" target="_blank" style="color: #3498db;">How much credit card debt does the average Canadian have? | MoneySense</a></li>
+                    
+                    <li><strong>Global News Report on Canadian Debt Trends:</strong><br>
+                        <a href="https://globalnews.ca/news/10946620/credit-card-debt-transunion-report/" target="_blank" style="color: #3498db;">More credit card debt likely for 1 in 5 as Canadians focus on 'surviving'</a></li>
+                </ul>
+
+                <h3>🧐 Consumer Psychology Research</h3>
+                <ul style="font-size: 1rem; line-height: 1.6;">
+                    <li><strong>Bankrate Psychology Study:</strong><br>
+                        <a href="https://www.bankrate.com/credit-cards/advice/psychology-of-credit-card-spending/" target="_blank" style="color: #3498db;">Swipe, Spend And Regret: The Sneaky Psychology Of Credit Card Spending</a></li>
+                    
+                    <li><strong>NerdWallet Analysis:</strong><br>
+                        <a href="https://www.nerdwallet.com/article/credit-cards/credit-cards-make-you-spend-more" target="_blank" style="color: #3498db;">Credit Cards Can Make You Spend More, but It's Not the Full Story</a></li>
+                    
+                    <li><strong>MoneyFit Psychology Report:</strong><br>
+                        <a href="https://www.moneyfit.org/psychology-of-credit-card-debt/" target="_blank" style="color: #3498db;">The Psychology of Credit Card Debt: How to Break the Cycle</a></li>
+                </ul>
+
+                <h3>🏛️ Legislative & Policy Sources</h3>
+                <ul style="font-size: 1rem; line-height: 1.6;">
+                    <li><strong>Senate Bill on Predatory Lending:</strong><br>
+                        <a href="https://www.whitehouse.senate.gov/news/release/whitehouse-blumenthal-durbin-introduce-bill-to-protect-consumers-from-predatory-high-cost-lending/" target="_blank" style="color: #3498db;">Whitehouse, Blumenthal & Durbin Introduce Bill to Protect Consumers from Predatory Lending</a></li>
+                    
+                    <li><strong>Consumer Rights & Legal Safeguards:</strong><br>
+                        <a href="https://www.moneymanagement.org/blog/lending-laws" target="_blank" style="color: #3498db;">Consumer Rights & Legal Safeguards Against Predatory Lending</a></li>
+                    
+                    <li><strong>PIRG Credit Card Trap Report:</strong><br>
+                        <a href="https://pirg.org/resources/the-credit-card-trap/" target="_blank" style="color: #3498db;">The Credit Card Trap | PIRG</a></li>
+                </ul>
+
+                <div class="highlight-box">
+                    <strong>📝 RESEARCH METHODOLOGY:</strong> All statistics and claims on this site are sourced from peer-reviewed studies, federal government data, consumer protection agencies, and reputable financial research organizations. Links are provided for full transparency and verification.
+                </div>
+
+                <div style="margin-top: 30px; padding: 20px; background: #f8f9fa; border-radius: 10px;">
+                    <h4>🔍 Want to Dig Deeper?</h4>
+                    <p>Each link above takes you directly to the original research. Print them out, share them with friends, or contact your representatives with these facts. Knowledge is power - and these studies prove the financial system is rigged against ordinary Americans.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="footer">
+        <h3>Wake Up North America - The Truth About Credit Cards</h3>
+        <p>Based on research from MIT, Federal Reserve, Bank of Canada, Consumer Financial Protection Bureau, Statistics Canada, TransUnion, Equifax, and peer-reviewed studies</p>
+        <p>Share this site: <strong>CreditCardTruth.com</strong></p>
+        
+        <div style="margin-top: 30px;">
+            <a href="#" class="cta-button" onclick="shareToTwitter()">🔥 SPREAD THE WORD 🔥</a>
+            <a href="#" class="cta-button" onclick="copyLink()">📋 COPY LINK</a>
+        </div>
+    </div>
+
+    <script>
+        // Debt Growth Chart
+        const ctx1 = document.getElementById('debtChart').getContext('2d');
+        new Chart(ctx1, {
+            type: 'line',
+            data: {
+                labels: ['1999', '2008', '2013', '2019', '2021', '2025'],
+                datasets: [{
+                    label: 'Credit Card Debt (Trillions)',
+                    data: [0.478, 0.866, 0.660, 0.927, 0.770, 1.21],
+                    borderColor: '#ff6b6b',
+                    backgroundColor: 'rgba(255, 107, 107, 0.1)',
+                    tension: 0.4,
+                    pointBackgroundColor: '#ff6b6b',
+                    pointBorderColor: '#fff',
+                    pointBorderWidth: 3,
+                    pointRadius: 6
+                }]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                plugins: {
+                    title: {
+                        display: true,
+                        text: 'US Credit Card Debt Growth: The Hockey Stick of Financial Destruction',
+                        font: { size: 16, weight: 'bold' },
+                        color: '#2c3e50'
+                    }
+                },
+                scales: {
+                    y: {
+                        beginAtZero: true,
+                        title: { display: true, text: 'Debt (Trillions USD)' }
+                    }
+                }
+            }
+        });
+
+        // Interest Rate Comparison Chart
+        const ctx2 = document.getElementById('interestChart').getContext('2d');
+        new Chart(ctx2, {
+            type: 'bar',
+            data: {
+                labels: ['Average Credit Card', 'Large Banks', 'Small Banks/Credit Unions', 'Personal Loan', 'Mortgage'],
+                datasets: [{
+                    label: 'Interest Rate (%)',
+                    data: [24.36, 28, 20, 12, 7],
+                    backgroundColor: [
+                        '#ff6b6b',
+                        '#e74c3c',
+                        '#3498db',
+                        '#f39c12',
+                        '#27ae60'
+                    ]
+                }]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                plugins: {
+                    title: {
+                        display: true,
+                        text: 'Interest Rate Comparison: Credit Cards vs Other Lending',
+                        font: { size: 16, weight: 'bold' },
+                        color: '#2c3e50'
+                    }
+                },
+                scales: {
+                    y: {
+                        beginAtZero: true,
+                        title: { display: true, text: 'Interest Rate (%)' }
+                    }
+                }
+            }
+        });
+
+        // Social sharing functions
+        function shareToTwitter() {
+            const text = "🚨 NORTH AMERICA UNDER ATTACK: US owes $1.21 TRILLION, Canada hits $2.5T in consumer debt! MIT shows credit cards activate same brain regions as COCAINE. Until 2025, Canadian lenders charged 47.9% interest legally! #CreditCardTruth #DebtCrisis #Canada #USA";
+            const url = window.location.href;
+            window.open(`https://twitter.com/intent/tweet?text=${encodeURIComponent(text)}&url=${encodeURIComponent(url)}`, '_blank');
+        }
+
+        function shareToFacebook() {
+            const url = window.location.href;
+            window.open(`https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent(url)}`, '_blank');
+        }
+
+        function shareToLinkedIn() {
+            const url = window.location.href;
+            const title = "The Credit Card Truth: How Banks Are Destroying America's Financial Future";
+            const summary = "MIT research reveals credit cards activate the same brain regions as cocaine. Americans now owe $1.21 trillion in credit card debt through systematic psychological manipulation.";
+            window.open(`https://www.linkedin.com/sharing/share-offsite/?url=${encodeURIComponent(url)}&title=${encodeURIComponent(title)}&summary=${encodeURIComponent(summary)}`, '_blank');
+        }
+
+        function copyLink() {
+            navigator.clipboard.writeText(window.location.href).then(() => {
+                alert('Link copied to clipboard! Share it everywhere to wake people up!');
+            });
+        }
+
+        // Add some interactive animations
+        document.addEventListener('DOMContentLoaded', function() {
+            // Animate numbers on scroll
+            const observerOptions = {
+                threshold: 0.5,
+                rootMargin: '0px 0px -100px 0px'
+            };
+
+            const observer = new IntersectionObserver(function(entries) {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.style.animation = 'pulse 1s ease-in-out';
+                    }
+                });
+            }, observerOptions);
+
+            document.querySelectorAll('.stat-card').forEach(card => {
+                observer.observe(card);
+            });
+        });
+    </script>
+</body>
+</html>
